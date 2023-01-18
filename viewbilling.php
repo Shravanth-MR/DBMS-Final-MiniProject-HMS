@@ -113,7 +113,7 @@ if($rs[bill_type]  == "Prescription charge")
 	echo 	" - " . $rstreatment2[treatmenttype];
 } 
 
-	echo " </td><td>&nbsp;$ $rs[bill_amount]</td></tr>";
+	echo " </td><td>&nbsp;₹ $rs[bill_amount]</td></tr>";
 		$billamt = $billamt +  $rs[bill_amount];
 		}
 		?>

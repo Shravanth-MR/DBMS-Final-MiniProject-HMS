@@ -15,7 +15,7 @@ $rsbill = mysqli_fetch_array($qsql);
 if(mysqli_num_rows($qsql) ==0)
 {
 	//Create billing invoice for appointment
-	$sql = "INSERT INTO billing( patientid, appointmentid, billingdate, billingtime, discount, taxamount, discountreason, discharge_time, discharge_date) VALUES ('$_GET[patientid]','$rsappointment1[0]','$dt','$tim','0','0','','','')";
+	$sql = "INSERT INTO billing(patientid, appointmentid, billingdate, billingtime) VALUES ('$_GET[patientid]','$rsappointment1[0]','$dt','$tim')";
 	$qsql=mysqli_query($con,$sql);
 	$billid = mysqli_insert_id($con);
 }

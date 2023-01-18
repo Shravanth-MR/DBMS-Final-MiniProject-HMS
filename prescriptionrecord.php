@@ -202,7 +202,7 @@ if(isset($_GET[editid]))
 		?>
         <tr>
           <th colspan="4" align="right">Grand Total </th>
-		  <th align="right">₹<?php echo $gtotal; ?></th>
+		  <th align="right">$<?php echo $gtotal; ?></th>
 		  <td></td>
           </tr>
         <tr>

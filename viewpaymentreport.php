@@ -47,7 +47,7 @@ $rsbilling_records = mysqli_fetch_array($qsqlbilling_records);
 			$billamt = $billamt +  $rs[bill_amount];
 		}
 ?>
-  &nbsp;$ <?php echo $billamt; ?></td>
+  &nbsp;₹ <?php echo $billamt; ?></td>
         </tr>
         <tr>
           <!-- <th width="442" scope="col"><div align="right"></div></th> -->
@@ -73,7 +73,7 @@ $rsbilling_records = mysqli_fetch_array($qsqlbilling_records);
 		<th rowspan="1" scope="col">&nbsp;</th>
 		  <th rowspan="1" scope="col">&nbsp;</th>
 		  <th scope="col"><div align="right">Paid Amount </div></th>
-		  <td>$ <?php
+		  <td>₹ <?php
 		  	$sqlpayment ="SELECT sum(paidamount) FROM payment where appointmentid='$billappointmentid'";
 			$qsqlpayment = mysqli_query($con,$sqlpayment);
 			$rspayment = mysqli_fetch_array($qsqlpayment);
@@ -84,7 +84,7 @@ $rsbilling_records = mysqli_fetch_array($qsqlbilling_records);
 		<th rowspan="1" scope="col">&nbsp;</th>
 		  <th rowspan="1" scope="col">&nbsp;</th>
 		  <th scope="col"><div align="right">Balance Amount</div></th>
-		  <td>$ <?php echo $balanceamt = $grandtotal - $rspayment[0]  ; ?></td>
+		  <td>₹ <?php echo $balanceamt = $grandtotal - $rspayment[0]  ; ?></td>
 	    </tr>
       </tbody>
     </table>
@@ -113,7 +113,7 @@ else
 			   <tr>
 				 <td>&nbsp;<?php echo $rspayment[paiddate]; ?></td>
 				 <td>&nbsp;<?php echo $rspayment[paidtime]; ?></td>
-				 <td>&nbsp;$ <?php echo $rspayment[paidamount]; ?></td>
+				 <td>&nbsp;₹ <?php echo $rspayment[paidamount]; ?></td>
 			   </tr>
 		<?php
 		}

@@ -15,7 +15,7 @@ if(!isset($_SESSION[doctorid]))
     <h2>Welcome <?php  $sql="SELECT * FROM `doctor` WHERE doctorid='$_SESSION[doctorid]' ";
     $doctortable = mysqli_query($con,$sql);
     $doc = mysqli_fetch_array($doctortable);
-
+    $x=$_SESSION[doctorid];
     echo 'Dr. '. $doc[doctorname]; ?>
 
   </h2>
@@ -48,7 +48,7 @@ if(!isset($_SESSION[doctorid]))
           <div class="content">
             <div class="text">Number of Patient</div>
             <div class="number"><?php
-            $sql = "SELECT * FROM patient WHERE status='Active'";
+            $sql = "SELECT *,doctorid FROM patient,appointment WHERE patient.status='Active' AND appointment.doctorid=$x";
             $qsql = mysqli_query($con,$sql);
             echo mysqli_num_rows($qsql);
             ?></div>

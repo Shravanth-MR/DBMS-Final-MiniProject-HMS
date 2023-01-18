@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2023 at 06:42 AM
+-- Generation Time: Jan 18, 2023 at 05:51 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -58,20 +58,18 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   `doctorid` int(10) NOT NULL,
   `status` varchar(10) NOT NULL,
   `app_reason` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `appointment`
 --
 
 INSERT INTO `appointment` (`appointmentid`, `appointmenttype`, `patientid`, `departmentid`, `appointmentdate`, `appointmenttime`, `doctorid`, `status`, `app_reason`) VALUES
-(1, '', 1, 1, '2019-06-17', '03:00:00', 1, 'Approved', 'Fever'),
-(2, '', 3, 2, '2021-06-25', '09:22:00', 2, 'Approved', 'this is a demo test'),
-(4, '', 5, 4, '2021-06-24', '14:28:00', 5, 'Approved', 'demo demo demo'),
-(5, '', 6, 7, '2021-06-24', '11:18:00', 7, 'Approved', 'Demo Test, Demo Reason!!'),
-(20, 'ONLINE', 13, 7, '2023-01-15', '16:04:00', 7, 'Pending', ''),
-(21, 'ONLINE', 14, 7, '2023-01-15', '16:08:00', 7, 'Approved', ''),
-(25, 'OFFLINE', 3, 1, '2023-01-16', '00:07:00', 1, 'Active', 'aaa');
+(1, 'ONLINE', 1, 3, '2023-01-18', '19:10:00', 4, 'Approved', 'gyn'),
+(2, 'ONLINE', 2, 1, '2023-01-18', '19:25:00', 1, 'Approved', ''),
+(3, 'ONLINE', 3, 2, '2023-01-18', '19:47:00', 3, 'Approved', ''),
+(4, 'ONLINE', 4, 7, '2023-01-18', '19:57:00', 7, 'Approved', 'yb'),
+(5, 'ONLINE', 5, 5, '2023-01-18', '20:39:00', 6, 'Approved', '');
 
 -- --------------------------------------------------------
 
@@ -85,19 +83,16 @@ CREATE TABLE IF NOT EXISTS `billing` (
   `appointmentid` int(10) NOT NULL,
   `billingdate` date NOT NULL,
   `billingtime` time NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing`
 --
 
 INSERT INTO `billing` (`billingid`, `patientid`, `appointmentid`, `billingdate`, `billingtime`) VALUES
-(1, 0, 0, '2019-06-15', '18:53:38'),
-(2, 1, 1, '2019-06-15', '19:56:20'),
-(3, 3, 2, '2021-06-24', '14:39:11'),
-(4, 5, 4, '2021-06-24', '18:48:00'),
-(5, 6, 5, '2021-06-24', '19:36:12'),
-(6, 8, 6, '2023-01-14', '15:13:01');
+(1, 3, 3, '2023-01-18', '19:46:08'),
+(2, 4, 4, '2023-01-18', '19:55:54'),
+(3, 5, 5, '2023-01-18', '20:36:38');
 
 -- --------------------------------------------------------
 
@@ -113,27 +108,29 @@ CREATE TABLE IF NOT EXISTS `billing_records` (
   `bill_amount` float(10,2) NOT NULL,
   `bill_date` date NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing_records`
 --
 
 INSERT INTO `billing_records` (`billingservice_id`, `billingid`, `bill_type_id`, `bill_type`, `bill_amount`, `bill_date`, `status`) VALUES
-(1, 2, 1, 'Consultancy Charge', 45.00, '2019-06-15', 'Active'),
-(2, 2, 20, 'Treatment', 300.00, '2019-06-15', 'Active'),
-(3, 2, 1, 'Prescription Charge', 45.00, '2019-06-15', 'Active'),
-(4, 3, 2, 'Consultancy Charge', 55.00, '2021-06-24', 'Active'),
-(5, 3, 20, 'Treatment', 300.00, '2021-06-24', 'Active'),
-(6, 4, 5, 'Consultancy Charge', 75.00, '2021-06-24', 'Active'),
-(7, 4, 20, 'Treatment', 179.00, '2021-06-24', 'Active'),
-(8, 4, 2, 'Prescription Charge', 55.00, '2021-06-24', 'Active'),
-(9, 5, 7, 'Consultancy Charge', 995.00, '2021-06-24', 'Active'),
-(10, 5, 33, 'Treatment', 4850.00, '2021-06-24', 'Active'),
-(11, 5, 3, 'Prescription Charge', 231.00, '2021-06-24', 'Active'),
-(12, 6, 7, 'Consultancy Charge', 995.00, '2023-01-14', 'Active'),
-(13, 6, 23, 'Treatment', 530.00, '2023-01-14', 'Active'),
-(14, 6, 4, 'Prescription Charge', 235.00, '2023-01-14', 'Active');
+(1, 0, 4, 'Consultancy Charge', 36.00, '2023-01-18', 'Active'),
+(2, 0, 21, 'Treatment', 70.00, '2023-01-18', 'Active'),
+(3, 0, 1, 'Prescription Charge', 0.00, '2023-01-18', 'Active'),
+(4, 0, 2, 'Prescription Charge', 78.00, '2023-01-18', 'Active'),
+(5, 0, 1, 'Consultancy Charge', 1000.00, '2023-01-18', 'Active'),
+(6, 0, 23, 'Treatment', 530.00, '2023-01-18', 'Active'),
+(7, 0, 3, 'Prescription Charge', 25.00, '2023-01-18', 'Active'),
+(8, 1, 3, 'Consultancy Charge', 500.00, '2023-01-18', 'Active'),
+(9, 1, 24, 'Treatment', 318.00, '2023-01-18', 'Active'),
+(10, 1, 4, 'Prescription Charge', 36.00, '2023-01-18', 'Active'),
+(11, 2, 7, 'Consultancy Charge', 995.00, '2023-01-18', 'Active'),
+(12, 2, 24, 'Treatment', 318.00, '2023-01-18', 'Active'),
+(13, 2, 5, 'Prescription Charge', 0.00, '2023-01-18', 'Active'),
+(14, 3, 6, 'Consultancy Charge', 104.00, '2023-01-18', 'Active'),
+(15, 3, 26, 'Treatment', 97560.00, '2023-01-18', 'Active'),
+(16, 3, 6, 'Prescription Charge', 104.00, '2023-01-18', 'Active');
 
 -- --------------------------------------------------------
 
@@ -329,23 +326,18 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `gender` varchar(10) NOT NULL,
   `dob` date NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `patient`
 --
 
 INSERT INTO `patient` (`patientid`, `patientname`, `admissiondate`, `admissiontime`, `address`, `mobileno`, `city`, `pincode`, `loginid`, `password`, `bloodgroup`, `gender`, `dob`, `status`) VALUES
-(1, 'Johnny', '2019-06-15', '18:47:22', 'Dhanmondi', '2125798361', 'Dhaka', '1207', 'admin@mail.com', '123456789', 'O+', 'MALE', '1990-01-01', 'Active'),
-(3, 'Christine Moore', '2021-06-24', '14:38:04', '4327 Â Pride Avenue', '7012225690', 'Elmhurst', '63520', 'christine', 'password', 'A-', 'Female', '1992-02-12', 'Active'),
-(4, 'Demoname', '2021-06-24', '15:26:32', 'demo address', '7474747474', 'demo city', '', 'demo', 'password', '', 'Male', '1995-02-02', 'Active'),
-(5, 'Thomas Walters', '2021-06-24', '18:44:22', '1723  Cinnamon Lane', '7023658800', 'San Antonio', '', 'thomas', 'password', '', 'Female', '1992-03-12', 'Active'),
-(6, 'Eryn Carlos', '2021-06-24', '19:34:27', '2649 Wayside Lane', '7012225896', 'San Jose', '', 'carlos', 'password', '', 'Female', '1994-03-12', 'Active'),
-(7, 'shreyas', '2023-01-14', '15:11:19', 'bang', '5656', 'bang', '89898', 'shreyas@mail.com', 'shreyas123', 'B+', 'MALE', '2007-02-14', 'Active'),
-(10, 'Johnny', '2023-01-15', '13:50:54', 'Dhanmondi', '2125798361', 'Dhaka', '', 'admin@mail.com', '123456789', '', 'Male', '1990-01-01', 'Active'),
-(13, 'abc', '2023-01-15', '16:01:52', 'aaaa', '66666', 'aaaaa', '', 'shreyas@mail.com', 'shreyas123', '', 'Male', '2012-01-15', 'Active'),
-(14, 'abc', '2023-01-15', '16:03:44', 'aaa', '2222', 'aaaa', '', 'aaa@mail.com', '123456789', '', 'Male', '2023-01-12', 'Active'),
-(15, 'aaa', '2023-01-15', '16:24:27', 'bbb', '2222', 'ccc', '111', 'aaaa@mail.com', '123456789', 'O-', 'Female', '2023-01-15', 'Active');
+(1, 'shreyas', '2023-01-18', '19:07:00', 'bangalore', '7878732323', 'bangalore', '560060', 'shreyas@mail.com', 'shreyas123', 'A-', 'MALE', '2002-04-09', 'Active'),
+(2, 'saif', '2023-01-18', '19:22:13', 'delhi', '9864696626', 'delhi', '342342', 'saif@mail.com', 'saif@123', 'B+', 'MALE', '2007-05-09', 'Active'),
+(3, 'shrujan', '2023-01-18', '19:44:10', 'ssss', '8542852542', 'dfgc ', '342424', 'shrujan@mail.com', 'shrujan123', 'B-', 'MALE', '2023-01-18', 'Active'),
+(4, 'shrujana', '2023-01-18', '19:53:08', 'bang', '4172542452', 'bang', '232323', 'shrujan1@mail.com', 'shrujan123', 'O+', 'MALE', '2004-01-15', 'Active'),
+(5, 'arya', '2023-01-18', '20:35:06', 'var', '384284524', 'hsd fc', '734874', 'arya@mail.com', 'arya@123', 'AB+', 'MALE', '2005-04-05', 'Active');
 
 -- --------------------------------------------------------
 
@@ -361,17 +353,14 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `paidtime` time NOT NULL,
   `paidamount` float(10,2) NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payment`
 --
 
 INSERT INTO `payment` (`paymentid`, `patientid`, `appointmentid`, `paiddate`, `paidtime`, `paidamount`, `status`) VALUES
-(1, 5, 4, '2021-06-24', '19:26:51', 324.45, 'Active'),
-(2, 6, 5, '2021-06-24', '19:54:23', 6379.80, 'Active'),
-(3, 3, 2, '2021-06-24', '19:56:33', 372.75, 'Active'),
-(5, 8, 6, '2023-01-14', '15:32:01', 1760.00, 'Active');
+(1, 3, 3, '2023-01-18', '19:47:48', 854.00, 'Active');
 
 -- --------------------------------------------------------
 
@@ -387,17 +376,19 @@ CREATE TABLE IF NOT EXISTS `prescription` (
   `prescriptiondate` date NOT NULL,
   `status` varchar(10) NOT NULL,
   `appointmentid` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `prescription`
 --
 
 INSERT INTO `prescription` (`prescriptionid`, `treatment_records_id`, `doctorid`, `patientid`, `prescriptiondate`, `status`, `appointmentid`) VALUES
-(1, 0, 1, 1, '2019-06-17', 'Active', 1),
-(2, 0, 5, 5, '2021-06-25', 'Active', 4),
-(3, 0, 7, 6, '2021-06-25', 'Active', 5),
-(4, 0, 7, 8, '2023-01-14', 'Active', 6);
+(1, 0, 4, 1, '2023-01-19', 'Active', 1),
+(2, 0, 4, 1, '2023-01-18', 'Active', 1),
+(3, 0, 1, 2, '2023-01-18', 'Active', 2),
+(4, 0, 3, 3, '2023-01-19', 'Active', 3),
+(5, 0, 7, 4, '2023-01-18', 'Active', 4),
+(6, 0, 6, 5, '2023-01-18', 'Active', 5);
 
 -- --------------------------------------------------------
 
@@ -420,10 +411,33 @@ CREATE TABLE IF NOT EXISTS `prescription_records` (
 --
 
 INSERT INTO `prescription_records` (`prescription_record_id`, `prescription_id`, `medicine_name`, `cost`, `unit`, `dosage`, `status`) VALUES
-(1, 1, '1', 3.00, 15, '1-1-1', 'Active'),
-(2, 2, '13', 55.00, 1, '0-1-1', 'Active'),
-(3, 3, '9', 231.00, 1, '1-0-1', 'Active'),
-(4, 4, '6', 5.00, 47, '0-1-1', 'Active');
+(1, 2, '3', 26.00, 3, '1-0-1', 'Active'),
+(2, 3, '6', 5.00, 5, '1-1-1', 'Active'),
+(3, 4, '4', 6.00, 6, '1-1-1', 'Active'),
+(4, 6, '3', 26.00, 4, '1-1-0', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `queries`
+--
+
+CREATE TABLE IF NOT EXISTS `queries` (
+`queryid` int(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `email` varchar(20) NOT NULL,
+  `phone` int(15) NOT NULL,
+  `department` varchar(25) NOT NULL,
+  `message` varchar(250) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `queries`
+--
+
+INSERT INTO `queries` (`queryid`, `name`, `email`, `phone`, `department`, `message`) VALUES
+(1, 'Asha', 'asha@mail.com', 2147483647, 'Medicine', 'Hello, Can I please know the procedure for Appointment'),
+(2, 'Daniel', 'daniel@mail.com', 2147483647, 'cardiology', 'Hi, Can I know the modes to make the hospital payments');
 
 -- --------------------------------------------------------
 
@@ -508,11 +522,11 @@ CREATE TABLE IF NOT EXISTS `treatment_records` (
 --
 
 INSERT INTO `treatment_records` (`treatment_records_id`, `treatmentid`, `appointmentid`, `patientid`, `doctorid`, `treatment_description`, `uploads`, `treatment_date`, `treatment_time`, `status`) VALUES
-(1, 20, 1, 1, 1, 'Fever \r\ntake paracitamol', '1746614148', '2019-06-15', '17:00:00', 'Active'),
-(2, 20, 2, 3, 2, 'Demo Treatment Description...', '20245sample_image.jpg', '2021-06-24', '18:24:00', 'Active'),
-(3, 20, 4, 5, 5, 'to study the morphology of blood and blood-forming tissues', '853sample_image.jpg', '2021-06-24', '16:40:00', 'Active'),
-(4, 33, 5, 6, 7, 'based on small cell lung cancer', '25208sample_image.jpg', '2021-06-24', '15:22:00', 'Active'),
-(5, 23, 6, 8, 7, 'abc', '31526', '2023-01-14', '15:20:00', 'Active');
+(1, 21, 1, 1, 4, 'sas', '9791', '2023-01-18', '19:11:00', 'Active'),
+(2, 23, 2, 2, 1, 'eded', '11020', '2023-01-18', '19:27:00', 'Active'),
+(3, 24, 3, 3, 3, 'gdggs', '7950', '2023-01-18', '19:48:00', 'Active'),
+(4, 24, 4, 4, 7, 'lksjgj', '11567', '2023-01-18', '19:00:00', 'Active'),
+(5, 26, 5, 5, 6, 'abc', '24665', '2023-01-18', '20:39:00', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -597,6 +611,12 @@ ALTER TABLE `prescription_records`
  ADD PRIMARY KEY (`prescription_record_id`);
 
 --
+-- Indexes for table `queries`
+--
+ALTER TABLE `queries`
+ ADD PRIMARY KEY (`queryid`);
+
+--
 -- Indexes for table `service_type`
 --
 ALTER TABLE `service_type`
@@ -627,17 +647,17 @@ MODIFY `adminid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-MODIFY `appointmentid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+MODIFY `appointmentid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
-MODIFY `billingid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `billingid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `billing_records`
 --
 ALTER TABLE `billing_records`
-MODIFY `billingservice_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+MODIFY `billingservice_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `department`
 --
@@ -667,22 +687,27 @@ MODIFY `medicineid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-MODIFY `patientid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `patientid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-MODIFY `paymentid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `paymentid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `prescription`
 --
 ALTER TABLE `prescription`
-MODIFY `prescriptionid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `prescriptionid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `prescription_records`
 --
 ALTER TABLE `prescription_records`
 MODIFY `prescription_record_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `queries`
+--
+ALTER TABLE `queries`
+MODIFY `queryid` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `service_type`
 --
