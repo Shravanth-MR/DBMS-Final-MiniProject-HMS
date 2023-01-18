@@ -26,7 +26,7 @@ if(isset($_POST[submit]))
 	else
 	{
 		$err = "<div class='alert alert-danger'>
-		<strong>Incorrect Credentials</strong> change username and password and try again.
+		<strong>Incorrect Credentials</strong> Check username and password and try again.
 	</div>";
 	}
 }
