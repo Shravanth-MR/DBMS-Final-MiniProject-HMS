@@ -50,7 +50,7 @@
                     </li>
                     <li class="col-sm-12">
                       <label>
-                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone"
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" maxlength="10"
                         value="<?php echo $rsedit[phone]; ?>">
                       </label>
                     </li>

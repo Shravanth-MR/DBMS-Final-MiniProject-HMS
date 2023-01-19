@@ -112,7 +112,7 @@ if(isset($_GET[editid]))
 		$qsqlmedicine = mysqli_query($con,$sqlmedicine);
 		while($rsmedicine = mysqli_fetch_array($qsqlmedicine))
 		{
-			echo "<option value='$rsmedicine[medicineid]'>$rsmedicine[medicinename] ( $ $rsmedicine[medicinecost] )</option>";
+			echo "<option value='$rsmedicine[medicineid]'>$rsmedicine[medicinename] ( ₹ $rsmedicine[medicinecost] )</option>";
 		}
 		?>
 		  </select>
