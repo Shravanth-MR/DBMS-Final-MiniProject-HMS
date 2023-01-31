@@ -1,20 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.2.11
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2021 at 08:03 PM
+-- Generation Time: Jan 19, 2023 at 02:09 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+5:30";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `ohmsphp`
@@ -26,21 +26,20 @@ SET time_zone = "+5:30";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
-  `adminid` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `admin` (
+`adminid` int(10) NOT NULL,
   `adminname` varchar(25) NOT NULL,
   `loginid` varchar(25) NOT NULL,
   `password` varchar(25) NOT NULL,
-  `status` varchar(10) NOT NULL,
-  `usertype` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`adminid`, `adminname`, `loginid`, `password`, `status`, `usertype`) VALUES
-(1, 'Joseph Spector', 'admin', 'Password@123', 'Active', '');
+INSERT INTO `admin` (`adminid`, `adminname`, `loginid`, `password`, `status`) VALUES
+(1, 'Joseph Spector', 'admin@mail.com', 'Password@123', 'Active');
 
 -- --------------------------------------------------------
 
@@ -48,28 +47,28 @@ INSERT INTO `admin` (`adminid`, `adminname`, `loginid`, `password`, `status`, `u
 -- Table structure for table `appointment`
 --
 
-CREATE TABLE `appointment` (
-  `appointmentid` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `appointment` (
+`appointmentid` int(10) NOT NULL,
   `appointmenttype` varchar(25) NOT NULL,
   `patientid` int(10) NOT NULL,
-  `roomid` int(10) NOT NULL,
   `departmentid` int(10) NOT NULL,
   `appointmentdate` date NOT NULL,
   `appointmenttime` time NOT NULL,
   `doctorid` int(10) NOT NULL,
   `status` varchar(10) NOT NULL,
   `app_reason` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`appointmentid`, `appointmenttype`, `patientid`, `roomid`, `departmentid`, `appointmentdate`, `appointmenttime`, `doctorid`, `status`, `app_reason`) VALUES
-(1, '', 1, 0, 1, '2019-06-17', '03:00:00', 1, 'Approved', 'Fever'),
-(2, '', 3, 0, 2, '2021-06-25', '09:22:00', 2, 'Approved', 'this is a demo test'),
-(4, '', 5, 0, 4, '2021-06-24', '14:28:00', 5, 'Approved', 'demo demo demo'),
-(5, '', 6, 0, 7, '2021-06-24', '11:18:00', 7, 'Approved', 'Demo Test, Demo Reason!!');
+INSERT INTO `appointment` (`appointmentid`, `appointmenttype`, `patientid`, `departmentid`, `appointmentdate`, `appointmenttime`, `doctorid`, `status`, `app_reason`) VALUES
+(1, 'ONLINE', 1, 3, '2023-01-18', '19:10:00', 4, 'Approved', 'gyn'),
+(2, 'ONLINE', 2, 1, '2023-01-18', '19:25:00', 1, 'Approved', ''),
+(3, 'ONLINE', 3, 2, '2023-01-18', '19:47:00', 3, 'Approved', ''),
+(4, 'ONLINE', 4, 7, '2023-01-18', '19:57:00', 7, 'Approved', 'yb'),
+(5, 'ONLINE', 5, 5, '2023-01-18', '20:39:00', 6, 'Approved', '');
 
 -- --------------------------------------------------------
 
@@ -77,29 +76,22 @@ INSERT INTO `appointment` (`appointmentid`, `appointmenttype`, `patientid`, `roo
 -- Table structure for table `billing`
 --
 
-CREATE TABLE `billing` (
-  `billingid` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `billing` (
+`billingid` int(10) NOT NULL,
   `patientid` int(10) NOT NULL,
   `appointmentid` int(10) NOT NULL,
   `billingdate` date NOT NULL,
-  `billingtime` time NOT NULL,
-  `discount` float(10,2) NOT NULL,
-  `taxamount` float(10,2) NOT NULL,
-  `discountreason` text NOT NULL,
-  `discharge_time` time NOT NULL,
-  `discharge_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `billingtime` time NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing`
 --
 
-INSERT INTO `billing` (`billingid`, `patientid`, `appointmentid`, `billingdate`, `billingtime`, `discount`, `taxamount`, `discountreason`, `discharge_time`, `discharge_date`) VALUES
-(1, 0, 0, '2019-06-15', '18:53:38', 0.00, 0.00, '', '00:00:00', '0000-00-00'),
-(2, 1, 1, '2019-06-15', '19:56:20', 0.00, 0.00, '', '00:00:00', '0000-00-00'),
-(3, 3, 2, '2021-06-24', '14:39:11', 0.00, 0.00, 'none , ', '07:56:26', '2021-06-24'),
-(4, 5, 4, '2021-06-24', '18:48:00', 0.00, 0.00, 'none , ', '07:26:39', '2021-06-24'),
-(5, 6, 5, '2021-06-24', '19:36:12', 0.00, 0.00, 'no discounts , ', '07:54:07', '2021-06-24');
+INSERT INTO `billing` (`billingid`, `patientid`, `appointmentid`, `billingdate`, `billingtime`) VALUES
+(1, 3, 3, '2023-01-18', '19:46:08'),
+(2, 4, 4, '2023-01-18', '19:55:54'),
+(3, 5, 5, '2023-01-18', '20:36:38');
 
 -- --------------------------------------------------------
 
@@ -107,32 +99,37 @@ INSERT INTO `billing` (`billingid`, `patientid`, `appointmentid`, `billingdate`,
 -- Table structure for table `billing_records`
 --
 
-CREATE TABLE `billing_records` (
-  `billingservice_id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `billing_records` (
+`billingservice_id` int(10) NOT NULL,
   `billingid` int(10) NOT NULL,
   `bill_type_id` int(10) NOT NULL COMMENT 'id of service charge or treatment charge',
   `bill_type` varchar(250) NOT NULL,
   `bill_amount` float(10,2) NOT NULL,
   `bill_date` date NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `billing_records`
 --
 
 INSERT INTO `billing_records` (`billingservice_id`, `billingid`, `bill_type_id`, `bill_type`, `bill_amount`, `bill_date`, `status`) VALUES
-(1, 2, 1, 'Consultancy Charge', 45.00, '2019-06-15', 'Active'),
-(2, 2, 20, 'Treatment', 300.00, '2019-06-15', 'Active'),
-(3, 2, 1, 'Prescription Charge', 45.00, '2019-06-15', 'Active'),
-(4, 3, 2, 'Consultancy Charge', 55.00, '2021-06-24', 'Active'),
-(5, 3, 20, 'Treatment', 300.00, '2021-06-24', 'Active'),
-(6, 4, 5, 'Consultancy Charge', 75.00, '2021-06-24', 'Active'),
-(7, 4, 20, 'Treatment', 179.00, '2021-06-24', 'Active'),
-(8, 4, 2, 'Prescription Charge', 55.00, '2021-06-24', 'Active'),
-(9, 5, 7, 'Consultancy Charge', 995.00, '2021-06-24', 'Active'),
-(10, 5, 33, 'Treatment', 4850.00, '2021-06-24', 'Active'),
-(11, 5, 3, 'Prescription Charge', 231.00, '2021-06-24', 'Active');
+(1, 0, 4, 'Consultancy Charge', 36.00, '2023-01-18', 'Active'),
+(2, 0, 21, 'Treatment', 70.00, '2023-01-18', 'Active'),
+(3, 0, 1, 'Prescription Charge', 0.00, '2023-01-18', 'Active'),
+(4, 0, 2, 'Prescription Charge', 78.00, '2023-01-18', 'Active'),
+(5, 0, 1, 'Consultancy Charge', 1000.00, '2023-01-18', 'Active'),
+(6, 0, 23, 'Treatment', 530.00, '2023-01-18', 'Active'),
+(7, 0, 3, 'Prescription Charge', 25.00, '2023-01-18', 'Active'),
+(8, 1, 3, 'Consultancy Charge', 500.00, '2023-01-18', 'Active'),
+(9, 1, 24, 'Treatment', 318.00, '2023-01-18', 'Active'),
+(10, 1, 4, 'Prescription Charge', 36.00, '2023-01-18', 'Active'),
+(11, 2, 7, 'Consultancy Charge', 995.00, '2023-01-18', 'Active'),
+(12, 2, 24, 'Treatment', 318.00, '2023-01-18', 'Active'),
+(13, 2, 5, 'Prescription Charge', 0.00, '2023-01-18', 'Active'),
+(14, 3, 6, 'Consultancy Charge', 104.00, '2023-01-18', 'Active'),
+(15, 3, 26, 'Treatment', 97560.00, '2023-01-18', 'Active'),
+(16, 3, 6, 'Prescription Charge', 104.00, '2023-01-18', 'Active');
 
 -- --------------------------------------------------------
 
@@ -140,12 +137,12 @@ INSERT INTO `billing_records` (`billingservice_id`, `billingid`, `bill_type_id`,
 -- Table structure for table `department`
 --
 
-CREATE TABLE `department` (
-  `departmentid` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `department` (
+`departmentid` int(10) NOT NULL,
   `departmentname` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `department`
@@ -168,8 +165,8 @@ INSERT INTO `department` (`departmentid`, `departmentname`, `description`, `stat
 -- Table structure for table `doctor`
 --
 
-CREATE TABLE `doctor` (
-  `doctorid` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `doctor` (
+`doctorid` int(10) NOT NULL,
   `doctorname` varchar(50) NOT NULL,
   `mobileno` varchar(15) NOT NULL,
   `departmentid` int(10) NOT NULL,
@@ -179,14 +176,14 @@ CREATE TABLE `doctor` (
   `education` varchar(25) NOT NULL,
   `experience` float(11,1) NOT NULL,
   `consultancy_charge` float(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `doctor`
 --
 
 INSERT INTO `doctor` (`doctorid`, `doctorname`, `mobileno`, `departmentid`, `loginid`, `password`, `status`, `education`, `experience`, `consultancy_charge`) VALUES
-(1, 'Carol Bosworth', '7002225650', 1, 'carol', 'password', 'Active', 'MBBS', 7.0, 7.00),
+(1, 'Carol Bosworth', '7002225650', 1, 'carol@mail.com', 'password', 'Active', 'MBBS', 7.0, 1000.00),
 (2, 'Sirena S Rivera', '7023695696', 2, 'rivera', 'password', 'Active', 'DM', 4.0, 400.00),
 (3, 'Will Williams', '7014545470', 2, 'wiliams', 'password', 'Active', 'DM', 7.0, 500.00),
 (4, 'Thomas Borkowski', '7025558690', 3, 'thomas', 'password', 'Active', 'MD', 4.0, 155.00),
@@ -195,45 +192,83 @@ INSERT INTO `doctor` (`doctorid`, `doctorname`, `mobileno`, `departmentid`, `log
 (7, 'Logan Fletcher', '7012569990', 7, 'logan', 'password', 'Active', 'MD', 5.0, 995.00),
 (8, 'Ben Bernier', '7012225470', 6, 'ben', 'password', 'Active', 'DM', 3.0, 689.00);
 
+--
+-- Triggers `doctor`
+--
+DELIMITER //
+CREATE TRIGGER `consultationtrigger` BEFORE UPDATE ON `doctor`
+ FOR EACH ROW BEGIN
+SET NEW.consultancy_charge = IF(NEW.consultancy_charge < 150, 150, 
+                                   IF(NEW.consultancy_charge > 1000, 1000, 
+                                      NEW.consultancy_charge));
+   INSERT INTO log_table (doctorid, old_charge, new_charge, update_date)
+   VALUES (NEW.doctorid, OLD.consultancy_charge, NEW.consultancy_charge, NOW());
+END
+//
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `doctor_timings`
 --
 
-CREATE TABLE `doctor_timings` (
-  `doctor_timings_id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `doctor_timings` (
+`doctor_timings_id` int(10) NOT NULL,
   `doctorid` int(10) NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
-  `available_day` varchar(15) NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `doctor_timings`
 --
 
-INSERT INTO `doctor_timings` (`doctor_timings_id`, `doctorid`, `start_time`, `end_time`, `available_day`, `status`) VALUES
-(17, 35, '09:30:00', '13:00:00', '', 'Active'),
-(18, 36, '13:30:00', '17:00:00', '', 'Active'),
-(19, 37, '14:00:00', '18:00:00', '', 'Active'),
-(20, 38, '17:00:00', '21:00:00', '', 'Active'),
-(21, 39, '13:00:00', '19:00:00', '', 'Active'),
-(22, 40, '07:00:00', '11:00:00', '', 'Active'),
-(23, 41, '13:30:00', '16:30:00', '', 'Active'),
-(24, 42, '11:30:00', '14:30:00', '', 'Active'),
-(25, 43, '12:30:00', '16:30:00', '', 'Active'),
-(26, 44, '21:30:00', '12:30:00', '', 'Active'),
-(27, 36, '01:03:00', '13:03:00', '', 'Active'),
-(28, 61, '11:11:00', '19:07:00', '', 'Active'),
-(29, 35, '11:11:00', '16:44:00', '', 'Active'),
-(30, 35, '01:10:00', '16:11:00', '', 'Active'),
-(31, 35, '01:02:00', '15:04:00', '2018-03-26', 'Active'),
-(32, 35, '16:25:00', '01:00:00', '', 'Active'),
-(33, 1, '18:00:00', '00:02:00', '', 'Active'),
-(34, 2, '07:36:00', '15:37:00', '', 'Active'),
-(35, 7, '09:24:00', '16:24:00', '', 'Active');
+INSERT INTO `doctor_timings` (`doctor_timings_id`, `doctorid`, `start_time`, `end_time`, `status`) VALUES
+(17, 35, '09:30:00', '13:00:00', 'Active'),
+(18, 36, '13:30:00', '17:00:00', 'Active'),
+(19, 37, '14:00:00', '18:00:00', 'Active'),
+(20, 38, '17:00:00', '21:00:00', 'Active'),
+(21, 39, '13:00:00', '19:00:00', 'Active'),
+(22, 40, '07:00:00', '11:00:00', 'Active'),
+(23, 41, '13:30:00', '16:30:00', 'Active'),
+(24, 42, '11:30:00', '14:30:00', 'Active'),
+(25, 43, '12:30:00', '16:30:00', 'Active'),
+(26, 44, '21:30:00', '12:30:00', 'Active'),
+(27, 36, '01:03:00', '13:03:00', 'Active'),
+(28, 61, '11:11:00', '19:07:00', 'Active'),
+(29, 35, '11:11:00', '16:44:00', 'Active'),
+(30, 35, '01:10:00', '16:11:00', 'Active'),
+(31, 35, '01:02:00', '15:04:00', 'Active'),
+(32, 35, '16:25:00', '01:00:00', 'Active'),
+(33, 1, '18:00:00', '00:02:00', 'Active'),
+(34, 2, '07:36:00', '15:37:00', 'Active'),
+(35, 7, '09:24:00', '16:24:00', 'Active'),
+(36, 1, '08:00:00', '11:00:00', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_table`
+--
+
+CREATE TABLE IF NOT EXISTS `log_table` (
+`log_id` int(11) NOT NULL,
+  `doctorid` int(11) NOT NULL,
+  `old_charge` decimal(11,2) NOT NULL,
+  `new_charge` decimal(11,2) NOT NULL,
+  `update_date` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `log_table`
+--
+
+INSERT INTO `log_table` (`log_id`, `doctorid`, `old_charge`, `new_charge`, `update_date`) VALUES
+(1, 1, '150.00', '150.00', '2023-01-14 16:23:00'),
+(2, 1, '150.00', '150.00', '2023-01-14 16:26:49'),
+(3, 1, '150.00', '1000.00', '2023-01-14 16:27:15');
 
 -- --------------------------------------------------------
 
@@ -241,13 +276,13 @@ INSERT INTO `doctor_timings` (`doctor_timings_id`, `doctorid`, `start_time`, `en
 -- Table structure for table `medicine`
 --
 
-CREATE TABLE `medicine` (
-  `medicineid` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `medicine` (
+`medicineid` int(10) NOT NULL,
   `medicinename` varchar(25) NOT NULL,
   `medicinecost` float(10,2) NOT NULL,
   `description` text NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `medicine`
@@ -272,35 +307,11 @@ INSERT INTO `medicine` (`medicineid`, `medicinename`, `medicinecost`, `descripti
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
---
-
-CREATE TABLE `orders` (
-  `orderid` int(10) NOT NULL,
-  `patientid` int(10) NOT NULL,
-  `doctorid` int(10) NOT NULL,
-  `prescriptionid` int(10) NOT NULL,
-  `orderdate` date NOT NULL,
-  `deliverydate` date NOT NULL,
-  `address` text NOT NULL,
-  `mobileno` varchar(15) NOT NULL,
-  `note` text NOT NULL,
-  `status` varchar(10) NOT NULL,
-  `payment_type` varchar(20) NOT NULL,
-  `card_no` varchar(20) NOT NULL,
-  `cvv_no` varchar(5) NOT NULL,
-  `expdate` date NOT NULL,
-  `card_holder` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `patient`
 --
 
-CREATE TABLE `patient` (
-  `patientid` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `patient` (
+`patientid` int(10) NOT NULL,
   `patientname` varchar(50) NOT NULL,
   `admissiondate` date NOT NULL,
   `admissiontime` time NOT NULL,
@@ -314,18 +325,18 @@ CREATE TABLE `patient` (
   `gender` varchar(10) NOT NULL,
   `dob` date NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `patient`
 --
 
 INSERT INTO `patient` (`patientid`, `patientname`, `admissiondate`, `admissiontime`, `address`, `mobileno`, `city`, `pincode`, `loginid`, `password`, `bloodgroup`, `gender`, `dob`, `status`) VALUES
-(1, 'Johnny', '2019-06-15', '18:47:22', 'Dhanmondi', '2125798361', 'Dhaka', '1207', 'admin', '123456789', 'O+', 'MALE', '1990-01-01', 'Active'),
-(3, 'Christine Moore', '2021-06-24', '14:38:04', '4327 Â Pride Avenue', '7012225690', 'Elmhurst', '63520', 'christine', 'password', 'A-', 'Female', '1992-02-12', 'Active'),
-(4, 'Demoname', '2021-06-24', '15:26:32', 'demo address', '7474747474', 'demo city', '', 'demo', 'password', '', 'Male', '1995-02-02', 'Active'),
-(5, 'Thomas Walters', '2021-06-24', '18:44:22', '1723  Cinnamon Lane', '7023658800', 'San Antonio', '', 'thomas', 'password', '', 'Female', '1992-03-12', 'Active'),
-(6, 'Eryn Carlos', '2021-06-24', '19:34:27', '2649 Wayside Lane', '7012225896', 'San Jose', '', 'carlos', 'password', '', 'Female', '1994-03-12', 'Active');
+(1, 'shreyas', '2023-01-18', '19:07:00', 'bangalore', '7878732323', 'bangalore', '560060', 'shreyas@mail.com', 'shreyas123', 'A-', 'MALE', '2002-04-09', 'Active'),
+(2, 'saif', '2023-01-18', '19:22:13', 'delhi', '9864696626', 'delhi', '342342', 'saif@mail.com', 'saif@123', 'B+', 'MALE', '2007-05-09', 'Active'),
+(3, 'shrujan', '2023-01-18', '19:44:10', 'ssss', '8542852542', 'dfgc ', '342424', 'shrujan@mail.com', 'shrujan123', 'B-', 'MALE', '2023-01-18', 'Active'),
+(4, 'shrujana', '2023-01-18', '19:53:08', 'bang', '4172542452', 'bang', '232323', 'shrujan1@mail.com', 'shrujan123', 'O+', 'MALE', '2004-01-15', 'Active'),
+(5, 'arya', '2023-01-18', '20:35:06', 'var', '384284524', 'hsd fc', '734874', 'arya@mail.com', 'arya@123', 'AB+', 'MALE', '2005-04-05', 'Active');
 
 -- --------------------------------------------------------
 
@@ -333,28 +344,22 @@ INSERT INTO `patient` (`patientid`, `patientname`, `admissiondate`, `admissionti
 -- Table structure for table `payment`
 --
 
-CREATE TABLE `payment` (
-  `paymentid` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `payment` (
+`paymentid` int(10) NOT NULL,
   `patientid` int(10) NOT NULL,
   `appointmentid` int(10) NOT NULL,
   `paiddate` date NOT NULL,
   `paidtime` time NOT NULL,
   `paidamount` float(10,2) NOT NULL,
-  `status` varchar(10) NOT NULL,
-  `cardholder` varchar(50) NOT NULL,
-  `cardnumber` int(25) NOT NULL,
-  `cvvno` int(5) NOT NULL,
-  `expdate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payment`
 --
 
-INSERT INTO `payment` (`paymentid`, `patientid`, `appointmentid`, `paiddate`, `paidtime`, `paidamount`, `status`, `cardholder`, `cardnumber`, `cvvno`, `expdate`) VALUES
-(1, 5, 4, '2021-06-24', '19:26:51', 324.45, 'Active', '', 0, 0, '0000-00-00'),
-(2, 6, 5, '2021-06-24', '19:54:23', 6379.80, 'Active', '', 0, 0, '0000-00-00'),
-(3, 3, 2, '2021-06-24', '19:56:33', 372.75, 'Active', '', 0, 0, '0000-00-00');
+INSERT INTO `payment` (`paymentid`, `patientid`, `appointmentid`, `paiddate`, `paidtime`, `paidamount`, `status`) VALUES
+(1, 3, 3, '2023-01-18', '19:47:48', 854.00, 'Active');
 
 -- --------------------------------------------------------
 
@@ -362,26 +367,27 @@ INSERT INTO `payment` (`paymentid`, `patientid`, `appointmentid`, `paiddate`, `p
 -- Table structure for table `prescription`
 --
 
-CREATE TABLE `prescription` (
-  `prescriptionid` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `prescription` (
+`prescriptionid` int(10) NOT NULL,
   `treatment_records_id` int(10) NOT NULL,
   `doctorid` int(10) NOT NULL,
   `patientid` int(10) NOT NULL,
-  `delivery_type` varchar(10) NOT NULL COMMENT 'Delivered through appointment or online order',
-  `delivery_id` int(10) NOT NULL COMMENT 'appointmentid or orderid',
   `prescriptiondate` date NOT NULL,
   `status` varchar(10) NOT NULL,
   `appointmentid` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `prescription`
 --
 
-INSERT INTO `prescription` (`prescriptionid`, `treatment_records_id`, `doctorid`, `patientid`, `delivery_type`, `delivery_id`, `prescriptiondate`, `status`, `appointmentid`) VALUES
-(1, 0, 1, 1, '', 0, '2019-06-17', 'Active', 1),
-(2, 0, 5, 5, '', 0, '2021-06-25', 'Active', 4),
-(3, 0, 7, 6, '', 0, '2021-06-25', 'Active', 5);
+INSERT INTO `prescription` (`prescriptionid`, `treatment_records_id`, `doctorid`, `patientid`, `prescriptiondate`, `status`, `appointmentid`) VALUES
+(1, 0, 4, 1, '2023-01-19', 'Active', 1),
+(2, 0, 4, 1, '2023-01-18', 'Active', 1),
+(3, 0, 1, 2, '2023-01-18', 'Active', 2),
+(4, 0, 3, 3, '2023-01-19', 'Active', 3),
+(5, 0, 7, 4, '2023-01-18', 'Active', 4),
+(6, 0, 6, 5, '2023-01-18', 'Active', 5);
 
 -- --------------------------------------------------------
 
@@ -389,50 +395,48 @@ INSERT INTO `prescription` (`prescriptionid`, `treatment_records_id`, `doctorid`
 -- Table structure for table `prescription_records`
 --
 
-CREATE TABLE `prescription_records` (
-  `prescription_record_id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `prescription_records` (
+`prescription_record_id` int(10) NOT NULL,
   `prescription_id` int(10) NOT NULL,
   `medicine_name` varchar(25) NOT NULL,
   `cost` float(10,2) NOT NULL,
   `unit` int(10) NOT NULL,
   `dosage` varchar(25) NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `prescription_records`
 --
 
 INSERT INTO `prescription_records` (`prescription_record_id`, `prescription_id`, `medicine_name`, `cost`, `unit`, `dosage`, `status`) VALUES
-(1, 1, '1', 3.00, 15, '1-1-1', 'Active'),
-(2, 2, '13', 55.00, 1, '0-1-1', 'Active'),
-(3, 3, '9', 231.00, 1, '1-0-1', 'Active');
+(1, 2, '3', 26.00, 3, '1-0-1', 'Active'),
+(2, 3, '6', 5.00, 5, '1-1-1', 'Active'),
+(3, 4, '4', 6.00, 6, '1-1-1', 'Active'),
+(4, 6, '3', 26.00, 4, '1-1-0', 'Active');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room`
+-- Table structure for table `queries`
 --
 
-CREATE TABLE `room` (
-  `roomid` int(10) NOT NULL,
-  `roomtype` varchar(25) NOT NULL,
-  `roomno` int(10) NOT NULL,
-  `noofbeds` int(10) NOT NULL,
-  `room_tariff` float(10,2) NOT NULL,
-  `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `queries` (
+`queryid` int(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `email` varchar(20) NOT NULL,
+  `phone` int(15) NOT NULL,
+  `department` varchar(25) NOT NULL,
+  `message` varchar(250) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `room`
+-- Dumping data for table `queries`
 --
 
-INSERT INTO `room` (`roomid`, `roomtype`, `roomno`, `noofbeds`, `room_tariff`, `status`) VALUES
-(15, 'GENERAL WARD', 1, 20, 500.00, 'Active'),
-(16, 'SPECIAL WARD', 2, 10, 100.00, 'Active'),
-(17, 'GENERAL WARD', 2, 10, 500.00, 'Active'),
-(18, 'GENERAL WARD', 121, 13, 150.00, 'Active'),
-(19, 'GENERAL WARD', 850, 11, 500.00, 'Active');
+INSERT INTO `queries` (`queryid`, `name`, `email`, `phone`, `department`, `message`) VALUES
+(1, 'Asha', 'asha@mail.com', 2147483647, 'Medicine', 'Hello, Can I please know the procedure for Appointment'),
+(2, 'Daniel', 'daniel@mail.com', 2147483647, 'cardiology', 'Hi, Can I know the modes to make the hospital payments');
 
 -- --------------------------------------------------------
 
@@ -440,13 +444,13 @@ INSERT INTO `room` (`roomid`, `roomtype`, `roomno`, `noofbeds`, `room_tariff`, `
 -- Table structure for table `service_type`
 --
 
-CREATE TABLE `service_type` (
-  `service_type_id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `service_type` (
+`service_type_id` int(10) NOT NULL,
   `service_type` varchar(100) NOT NULL,
   `servicecharge` float(10,2) NOT NULL,
   `description` text NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service_type`
@@ -465,13 +469,13 @@ INSERT INTO `service_type` (`service_type_id`, `service_type`, `servicecharge`, 
 -- Table structure for table `treatment`
 --
 
-CREATE TABLE `treatment` (
-  `treatmentid` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `treatment` (
+`treatmentid` int(10) NOT NULL,
   `treatmenttype` varchar(25) NOT NULL,
   `treatment_cost` decimal(10,2) NOT NULL,
   `note` text NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `treatment`
@@ -499,8 +503,8 @@ INSERT INTO `treatment` (`treatmentid`, `treatmenttype`, `treatment_cost`, `note
 -- Table structure for table `treatment_records`
 --
 
-CREATE TABLE `treatment_records` (
-  `treatment_records_id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `treatment_records` (
+`treatment_records_id` int(10) NOT NULL,
   `treatmentid` int(10) NOT NULL,
   `appointmentid` int(10) NOT NULL,
   `patientid` int(10) NOT NULL,
@@ -510,40 +514,18 @@ CREATE TABLE `treatment_records` (
   `treatment_date` date NOT NULL,
   `treatment_time` time NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `treatment_records`
 --
 
 INSERT INTO `treatment_records` (`treatment_records_id`, `treatmentid`, `appointmentid`, `patientid`, `doctorid`, `treatment_description`, `uploads`, `treatment_date`, `treatment_time`, `status`) VALUES
-(1, 20, 1, 1, 1, 'Fever \r\ntake paracitamol', '1746614148', '2019-06-15', '17:00:00', 'Active'),
-(2, 20, 2, 3, 2, 'Demo Treatment Description...', '20245sample_image.jpg', '2021-06-24', '18:24:00', 'Active'),
-(3, 20, 4, 5, 5, 'to study the morphology of blood and blood-forming tissues', '853sample_image.jpg', '2021-06-24', '16:40:00', 'Active'),
-(4, 33, 5, 6, 7, 'based on small cell lung cancer', '25208sample_image.jpg', '2021-06-24', '15:22:00', 'Active');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `userid` int(11) NOT NULL,
-  `loginname` varchar(50) NOT NULL,
-  `password` varchar(10) NOT NULL,
-  `patientname` varchar(50) NOT NULL,
-  `mobileno` varchar(15) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `createddateandtime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`userid`, `loginname`, `password`, `patientname`, `mobileno`, `email`, `createddateandtime`) VALUES
-(1, 'admin', 'admin', 'admin', '', '', '2017-12-14 11:21:45');
+(1, 21, 1, 1, 4, 'sas', '9791', '2023-01-18', '19:11:00', 'Active'),
+(2, 23, 2, 2, 1, 'eded', '11020', '2023-01-18', '19:27:00', 'Active'),
+(3, 24, 3, 3, 3, 'gdggs', '7950', '2023-01-18', '19:48:00', 'Active'),
+(4, 24, 4, 4, 7, 'lksjgj', '11567', '2023-01-18', '19:00:00', 'Active'),
+(5, 26, 5, 5, 6, 'abc', '24665', '2023-01-18', '20:39:00', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -553,111 +535,103 @@ INSERT INTO `user` (`userid`, `loginname`, `password`, `patientname`, `mobileno`
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
-  ADD PRIMARY KEY (`adminid`),
-  ADD UNIQUE KEY `adminname` (`adminname`);
+ ADD PRIMARY KEY (`adminid`), ADD UNIQUE KEY `adminname` (`adminname`);
 
 --
 -- Indexes for table `appointment`
 --
 ALTER TABLE `appointment`
-  ADD PRIMARY KEY (`appointmentid`);
+ ADD PRIMARY KEY (`appointmentid`), ADD KEY `patientid` (`patientid`), ADD KEY `departmentid` (`departmentid`), ADD KEY `doctorid` (`doctorid`);
 
 --
 -- Indexes for table `billing`
 --
 ALTER TABLE `billing`
-  ADD PRIMARY KEY (`billingid`);
+ ADD PRIMARY KEY (`billingid`), ADD KEY `patientid` (`patientid`), ADD KEY `appointmentid` (`appointmentid`);
 
 --
 -- Indexes for table `billing_records`
 --
 ALTER TABLE `billing_records`
-  ADD PRIMARY KEY (`billingservice_id`);
+ ADD PRIMARY KEY (`billingservice_id`), ADD KEY `billingid` (`billingid`);
 
 --
 -- Indexes for table `department`
 --
 ALTER TABLE `department`
-  ADD PRIMARY KEY (`departmentid`);
+ ADD PRIMARY KEY (`departmentid`);
 
 --
 -- Indexes for table `doctor`
 --
 ALTER TABLE `doctor`
-  ADD PRIMARY KEY (`doctorid`);
+ ADD PRIMARY KEY (`doctorid`), ADD KEY `departmentid` (`departmentid`);
 
 --
 -- Indexes for table `doctor_timings`
 --
 ALTER TABLE `doctor_timings`
-  ADD PRIMARY KEY (`doctor_timings_id`);
+ ADD PRIMARY KEY (`doctor_timings_id`), ADD KEY `doctorid` (`doctorid`);
+
+--
+-- Indexes for table `log_table`
+--
+ALTER TABLE `log_table`
+ ADD PRIMARY KEY (`log_id`), ADD UNIQUE KEY `log_id` (`log_id`), ADD KEY `doctorid` (`doctorid`);
 
 --
 -- Indexes for table `medicine`
 --
 ALTER TABLE `medicine`
-  ADD PRIMARY KEY (`medicineid`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`orderid`);
+ ADD PRIMARY KEY (`medicineid`);
 
 --
 -- Indexes for table `patient`
 --
 ALTER TABLE `patient`
-  ADD PRIMARY KEY (`patientid`),
-  ADD KEY `loginid` (`loginid`);
+ ADD PRIMARY KEY (`patientid`), ADD KEY `loginid` (`loginid`);
 
 --
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
-  ADD PRIMARY KEY (`paymentid`);
+ ADD PRIMARY KEY (`paymentid`), ADD KEY `patientid` (`patientid`), ADD KEY `appointmentid` (`appointmentid`);
 
 --
 -- Indexes for table `prescription`
 --
 ALTER TABLE `prescription`
-  ADD PRIMARY KEY (`prescriptionid`);
+ ADD PRIMARY KEY (`prescriptionid`), ADD KEY `doctorid` (`doctorid`), ADD KEY `patientid` (`patientid`), ADD KEY `appointmentid` (`appointmentid`);
 
 --
 -- Indexes for table `prescription_records`
 --
 ALTER TABLE `prescription_records`
-  ADD PRIMARY KEY (`prescription_record_id`);
+ ADD PRIMARY KEY (`prescription_record_id`), ADD KEY `prescription_id` (`prescription_id`);
 
 --
--- Indexes for table `room`
+-- Indexes for table `queries`
 --
-ALTER TABLE `room`
-  ADD PRIMARY KEY (`roomid`);
+ALTER TABLE `queries`
+ ADD PRIMARY KEY (`queryid`);
 
 --
 -- Indexes for table `service_type`
 --
 ALTER TABLE `service_type`
-  ADD PRIMARY KEY (`service_type_id`);
+ ADD PRIMARY KEY (`service_type_id`);
 
 --
 -- Indexes for table `treatment`
 --
 ALTER TABLE `treatment`
-  ADD PRIMARY KEY (`treatmentid`);
+ ADD PRIMARY KEY (`treatmentid`);
 
 --
 -- Indexes for table `treatment_records`
 --
 ALTER TABLE `treatment_records`
-  ADD PRIMARY KEY (`treatment_records_id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`userid`);
+ ADD PRIMARY KEY (`treatment_records_id`), ADD KEY `treatmentid` (`treatmentid`), ADD KEY `appointmentid` (`appointmentid`), ADD KEY `patientid` (`patientid`), ADD KEY `doctorid` (`doctorid`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -667,92 +641,148 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+MODIFY `adminid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appointmentid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+MODIFY `appointmentid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
-  MODIFY `billingid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+MODIFY `billingid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `billing_records`
 --
 ALTER TABLE `billing_records`
-  MODIFY `billingservice_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+MODIFY `billingservice_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `departmentid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+MODIFY `departmentid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `doctorid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+MODIFY `doctorid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `doctor_timings`
 --
 ALTER TABLE `doctor_timings`
-  MODIFY `doctor_timings_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+MODIFY `doctor_timings_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `log_table`
+--
+ALTER TABLE `log_table`
+MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `medicineid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `orderid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+MODIFY `medicineid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `patientid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+MODIFY `patientid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `paymentid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `paymentid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `prescription`
 --
 ALTER TABLE `prescription`
-  MODIFY `prescriptionid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `prescriptionid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `prescription_records`
 --
 ALTER TABLE `prescription_records`
-  MODIFY `prescription_record_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `prescription_record_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `room`
+-- AUTO_INCREMENT for table `queries`
 --
-ALTER TABLE `room`
-  MODIFY `roomid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+ALTER TABLE `queries`
+MODIFY `queryid` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `service_type`
 --
 ALTER TABLE `service_type`
-  MODIFY `service_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+MODIFY `service_type_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `treatment`
 --
 ALTER TABLE `treatment`
-  MODIFY `treatmentid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+MODIFY `treatmentid` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `treatment_records`
 --
 ALTER TABLE `treatment_records`
-  MODIFY `treatment_records_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+MODIFY `treatment_records_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `user`
+-- Constraints for dumped tables
 --
-ALTER TABLE `user`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for table `appointment`
+--
+ALTER TABLE `appointment`
+ADD CONSTRAINT `forapppat` FOREIGN KEY (`patientid`) REFERENCES `patient` (`patientid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `fordepapp` FOREIGN KEY (`departmentid`) REFERENCES `department` (`departmentid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `fordocapp` FOREIGN KEY (`doctorid`) REFERENCES `doctor` (`doctorid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `billing`
+--
+ALTER TABLE `billing`
+ADD CONSTRAINT `forbilapp` FOREIGN KEY (`appointmentid`) REFERENCES `appointment` (`appointmentid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `forbilpat` FOREIGN KEY (`patientid`) REFERENCES `patient` (`patientid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `doctor`
+--
+ALTER TABLE `doctor`
+ADD CONSTRAINT `fordocdep` FOREIGN KEY (`departmentid`) REFERENCES `department` (`departmentid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `log_table`
+--
+ALTER TABLE `log_table`
+ADD CONSTRAINT `forlogdoc` FOREIGN KEY (`doctorid`) REFERENCES `doctor` (`doctorid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `payment`
+--
+ALTER TABLE `payment`
+ADD CONSTRAINT `forpayapp` FOREIGN KEY (`appointmentid`) REFERENCES `appointment` (`appointmentid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `forpaypat` FOREIGN KEY (`patientid`) REFERENCES `patient` (`patientid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `prescription`
+--
+ALTER TABLE `prescription`
+ADD CONSTRAINT `forpreapp` FOREIGN KEY (`appointmentid`) REFERENCES `appointment` (`appointmentid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `forpredoc` FOREIGN KEY (`doctorid`) REFERENCES `doctor` (`doctorid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `forprepat` FOREIGN KEY (`patientid`) REFERENCES `patient` (`patientid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `prescription_records`
+--
+ALTER TABLE `prescription_records`
+ADD CONSTRAINT `forprerpre` FOREIGN KEY (`prescription_id`) REFERENCES `prescription` (`prescriptionid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `treatment_records`
+--
+ALTER TABLE `treatment_records`
+ADD CONSTRAINT `fortrerapp` FOREIGN KEY (`appointmentid`) REFERENCES `appointment` (`appointmentid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `fortrerdoc` FOREIGN KEY (`doctorid`) REFERENCES `doctor` (`doctorid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `fortrerpat` FOREIGN KEY (`patientid`) REFERENCES `patient` (`patientid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `fortrertre` FOREIGN KEY (`treatmentid`) REFERENCES `treatment` (`treatmentid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
