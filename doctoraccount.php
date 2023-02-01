@@ -70,18 +70,18 @@ if(!isset($_SESSION[doctorid]))
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-6">
-        <div class="info-box-4 hover-zoom-effect">
-          <div class="icon"> <i class="zmdi zmdi-money col-green"></i> </div>
-          <div class="content">
-            <div class="text">Total Earnings</div>
-            <div class="number">₹ 
+      <!-- <div class="col-lg-3 col-md-3 col-sm-6"> -->
+        <!-- <div class="info-box-4 hover-zoom-effect"> -->
+          <!-- <div class="icon"> <i class="zmdi zmdi-money col-green"></i> </div> -->
+          <!-- <div class="content"> -->
+            <!-- <div class="text">Total Earnings</div> -->
+            <!-- <div class="number">₹  -->
               <?php 
               $sql = "SELECT sum(bill_amount) as total  FROM `billing_records` WHERE `bill_type` = 'Consultancy Charge'" ;
               $qsql = mysqli_query($con,$sql);
               while ($row = mysqli_fetch_assoc($qsql))
               { 
-               echo $row['total'];
+              //  echo $row['total'];
              }
               ?>
 
